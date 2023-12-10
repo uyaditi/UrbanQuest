@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "775060165786",
+    "project_id": "iitb-f5d09",
+    "storage_bucket": "iitb-f5d09.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:775060165786:android:e9af97a9f46eda14f07b23",
+        "android_client_info": {
+          "package_name": "com.example.iitb"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsf-bVLiV45KhvIttTcRYhrLMNaQbKv_o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

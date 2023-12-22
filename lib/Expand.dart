@@ -1,35 +1,55 @@
 import 'package:flutter/material.dart';
 
-class InfoCard extends StatelessWidget {
+class InfoCard extends StatefulWidget {
+  @override
+  State<InfoCard> createState() => _InfoCardState();
+}
+
+class _InfoCardState extends State<InfoCard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Card(
-          elevation: 10,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.0),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Image
+            Stack(
+              children: [
+                Container(
+                  height: 400,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius:  BorderRadius.only(
+                      bottomLeft: Radius.circular(15.0),
+                      bottomRight: Radius.circular(15.0),
+                    ),
+                    image: DecorationImage(
+                      image: AssetImage('assets/spa/spa1.jpg'), // Replace with your image path
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 20, // Adjust this value as needed for positioning
+                  right: 20, // Adjust this value as needed for positioning
+                  child: FloatingActionButton(
+                    onPressed: () {
+                      // Add your onPressed logic here
+                    },
+                    child: Icon(Icons.bookmark),
+                    backgroundColor: Color(0xFF83aabc),
+                  ),
+                ),
+                SizedBox(height: 10,),
+              ],
+            ),
+            SizedBox(height: 40),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Image
-                  Container(
-                    height: 200,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12.0),
-                      image: DecorationImage(
-                        image: AssetImage('assets/spa/spa1.jpg'), // Replace with your image path
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  // Shop Name and Distance
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -153,10 +173,11 @@ class InfoCard extends StatelessWidget {
                     ),
                     title: Text('Website: http://www.theleela.com/en_us/hotels-in-mumbai/the-leela-mumbai-hotel/spa/signature-spa-treatments',style: TextStyle(fontFamily: "crete",fontSize: 15),), // Replace with actual start time
                   ),
+                  SizedBox(height: 20,)
                 ],
               ),
-            ),
-          ),
+            )
+          ],
         ),
       ),
     );

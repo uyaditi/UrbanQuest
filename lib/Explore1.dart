@@ -4,16 +4,16 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Cards.dart';
-import 'image_constant.dart';
+import 'Image_constant.dart';
 
-class explore extends StatefulWidget {
-  const explore({Key? key}) : super(key: key);
+class explore1 extends StatefulWidget {
+  const explore1({Key? key}) : super(key: key);
 
   @override
-  State<explore> createState() => _exploreState();
+  State<explore1> createState() => _explore1State();
 }
 
-class _exploreState extends State<explore> {
+class _explore1State extends State<explore1> {
   TextEditingController _searchController = TextEditingController();
   List<String> selectedChips = [];
   String latitude = '';

@@ -4,22 +4,24 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-import 'package:iitb/intrest.dart';
+import 'package:iitb/Home.dart';
+import 'package:iitb/Home1.dart';
+import 'package:iitb/Intrest.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'home1.dart';
 
-class otp1 extends StatefulWidget {
+class Otp extends StatefulWidget {
   final String mobileNumber;
-  final String Uid;
+  final String documentUID;
 
-  otp1({required this.mobileNumber, required this.Uid});
+
+  Otp({required this.mobileNumber, required this.documentUID});
 
   @override
-  State<otp1> createState() => _otp1State();
+  State<Otp> createState() => _OtpState();
 }
 
-class _otp1State extends State<otp1> {
+class _OtpState extends State<Otp> {
 
   OtpFieldController otpController = OtpFieldController();
 
@@ -111,14 +113,14 @@ class _otp1State extends State<otp1> {
     }
   }
 
-  Future<void> saveUserData(String name, String number, String uid) async {
+  Future<void> saveUserData(String name, String number, String uid, List<String> selectedChips) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('name', name);
     await prefs.setString('number', number);
     await prefs.setString('uid', uid);
-    await prefs.setBool('isLoggedIn', true);
+    await prefs.setStringList('selectedChips', selectedChips);
+    await prefs.setBool('isLoggedIn', true); // Set isLoggedIn to true to indicate the user is logged in
   }
-
 
   Future<void> _submitOTP(String otp) async {
     setState(() {
@@ -131,35 +133,31 @@ class _otp1State extends State<otp1> {
       );
       await FirebaseAuth.instance.signInWithCredential(credential);
 
-      // Save the verified number in Firestore
-      final usersRef = FirebaseFirestore.instance.collection('users');
-
-      final googleUserRef = usersRef.doc(widget.Uid); // Use the Google user's UID as the document ID
-      await googleUserRef.update({
-        'number': widget.mobileNumber,
-      });
-
-      Map<String, dynamic>? userData = await _getUserData(widget.Uid);
+      Map<String, dynamic>? userData = await _getUserData(widget.documentUID);
 
       if (userData != null) {
         String? userName = userData['name'] as String?;
         String? userNumber = userData['number'] as String?;
+        List<String>? selectedChips = userData['selectedChips'].cast<String>();
 
         await saveUserData(
-            userName.toString().trim(),
-            userNumber.toString().trim(),
-            widget.Uid,
+          userName.toString().trim(),
+          userNumber.toString().trim(),
+          widget.documentUID,
+          selectedChips ?? [],
         );
 
         setState(() {
           _isLoading = false;
         });
+
         // Navigate to home page after verification
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => intrest(Uid: widget.Uid)),
+          MaterialPageRoute(builder: (context) => Home1()),
         );
-      } }catch (e) {
+      }
+    }catch (e) {
       print('Error submitting OTP: $e');
       String errorMessage = 'Error verifying OTP. Please try again.';
       if (e is FirebaseAuthException) {
@@ -178,6 +176,8 @@ class _otp1State extends State<otp1> {
       );
     }
   }
+
+
 
   @override
   void initState() {
@@ -281,16 +281,16 @@ class _otp1State extends State<otp1> {
                     ),
                   )
                       : Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 28.0),
-                    child: Text(
-                      "Verify",
-                      style: TextStyle(
+                        padding: const EdgeInsets.symmetric(horizontal: 28.0),
+                        child: Text(
+                    "Verify",
+                    style: TextStyle(
                         color: Colors.black,
                         fontFamily: "crete",
                         fontSize: 20,
-                      ),
                     ),
                   ),
+                      ),
                 ),
               ),
               Padding(

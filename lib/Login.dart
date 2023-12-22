@@ -1,18 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:iitb/otp.dart';
-import 'package:iitb/register.dart';
+import 'package:iitb/Otp.dart';
+import 'package:iitb/Register.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class login extends StatefulWidget {
-  const login({super.key});
+class Login extends StatefulWidget {
+  const Login({super.key});
 
   @override
-  State<login> createState() => _loginState();
+  State<Login> createState() => _LoginState();
 }
 
-class _loginState extends State<login> {
+class _LoginState extends State<Login> {
 
   bool _isLoading = false;
 
@@ -103,7 +103,7 @@ class _loginState extends State<login> {
           // If the number exists, navigate to the verify1 screen and pass the document UID
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => otp(mobileNumber: userNumber, documentUID: documentUID)),
+            MaterialPageRoute(builder: (context) => Otp(mobileNumber: userNumber, documentUID: documentUID)),
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -111,7 +111,7 @@ class _loginState extends State<login> {
           );
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => register()),
+            MaterialPageRoute(builder: (context) => Register()),
           );
         }
       } catch (e) {
@@ -330,7 +330,7 @@ class _loginState extends State<login> {
                               ..onTap = () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => register()
+                                  MaterialPageRoute(builder: (context) => Register()
                                   ),
                                 );
                               },

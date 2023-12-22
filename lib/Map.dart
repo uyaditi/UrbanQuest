@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:here_sdk/core.dart';
 import 'package:here_sdk/mapview.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -71,45 +73,54 @@ class _MapScreenState extends State<MapScreen> {
                       padding: const EdgeInsets.only(left: 60.0),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.grey.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(16.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.3),
+                              blurRadius: 20,
+                              spreadRadius:1,
+                              offset: Offset(0, 3),
+                            ),
+                          ],
                         ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Row(
-                            children: [
-                              Icon(Icons.search, color: Colors.black54),
-                              SizedBox(width: 10.0),
-                              Expanded(
-                                child: TextFormField(
-                                  cursorColor: Colors.black54,
-                                  controller: _searchController,
-                                  onFieldSubmitted: (value) {
-                                    setState(() {
-                                      isSearching = true;
-                                    });
-                                    _onSearchSubmitted(value);
-                                  },
-                                  onChanged: (value1) {
-                                    if (value1.isEmpty) {
-                                      setState(() {
-                                        isSearching = false;
-                                      });
-                                      // Clear search results
-                                    }
-                                  },
-                                  decoration: InputDecoration(
-                                    hintText: 'Find Location',
-                                    hintStyle: TextStyle(
-                                        color: Colors.black54,
-                                        fontFamily: "crete"),
-                                    border: InputBorder.none,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16.0),
+                          child: BackdropFilter(
+                            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 10.0),
+                              color: Colors.white.withOpacity(0.2), // Adjust opacity here
+                              child: Row(
+                                children: [
+                                  Icon(Icons.search, color: Colors.black54),
+                                  SizedBox(width: 10.0),
+                                  Expanded(
+                                    child: TextField(
+                                      cursorColor: Colors.black54,
+                                      controller: _searchController,
+                                      onSubmitted: (value) {
+                                        setState(() {
+                                          isSearching = true;
+                                        });
+                                      },
+                                      onChanged: (value1){
+                                        if(value1.isEmpty){
+                                          setState(() {
+                                            isSearching = false;
+                                          });
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        hintText: "Find Location",
+                                        hintStyle: TextStyle(color: Colors.black54, fontFamily: "crete"),
+                                        border: InputBorder.none,
+                                      ),
+                                      style: TextStyle(color: Colors.black54, fontSize: 18.0,fontFamily: "crete"),
+                                    ),
                                   ),
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 18.0),
-                                ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
                       ),
@@ -119,6 +130,18 @@ class _MapScreenState extends State<MapScreen> {
                     // isSearching ? _buildSearchResults() : _buildInterestContainers(),
                   ],
                 ),
+              ),
+            ),
+            Positioned(
+              top: 15,
+              left: 13,
+              child: FloatingActionButton(
+                heroTag: "btn1",
+                onPressed: () {
+                  ZoomDrawer.of(context)!.toggle();
+                },
+                child: Icon(Icons.menu,color: Color(0xFF83aabc),),
+                backgroundColor: Color(0xFFeaf3ff),
               ),
             ),
           ],

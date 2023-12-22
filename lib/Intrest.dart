@@ -1,18 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:iitb/home1.dart';
+import 'package:iitb/Home1.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class intrest extends StatefulWidget {
+class Intrest extends StatefulWidget {
   final String Uid;
 
-  intrest({required this.Uid});
+  Intrest({required this.Uid});
 
   @override
-  State<intrest> createState() => _intrestState();
+  State<Intrest> createState() => _IntrestState();
 }
 
-class _intrestState extends State<intrest> {
+class _IntrestState extends State<Intrest> {
   List<String> selectedChips = [];
   List<String> filterChips = [
     'Restaurants',
@@ -52,7 +52,7 @@ class _intrestState extends State<intrest> {
 
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => home1()),
+            MaterialPageRoute(builder: (context) => Home1()),
           );
         }).catchError((error) {
           print('Failed to add selected chips: $error');
@@ -170,7 +170,7 @@ class _intrestState extends State<intrest> {
           _saveToFirestore(["Restaurants","Cafes","Malls"]);
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => home1()),
+            MaterialPageRoute(builder: (context) => Home1()),
           );
         },
         label: Text('Skip',style: TextStyle(

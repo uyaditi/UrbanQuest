@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import 'login.dart';
-import 'otp.dart';
-import 'otp1.dart';
+import 'Login.dart';
+import 'Otp.dart';
+import 'Otp1.dart';
 
 class extranumber extends StatefulWidget {
   final String uid;
@@ -59,7 +59,7 @@ class _extranumberState extends State<extranumber> {
         );
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => login()),
+          MaterialPageRoute(builder: (context) => Login()),
         );
       } else {
         setState(() {
@@ -68,7 +68,7 @@ class _extranumberState extends State<extranumber> {
 
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => otp1(mobileNumber: numberController.text,Uid:widget.uid)),
+          MaterialPageRoute(builder: (context) => Otp1(mobileNumber: numberController.text,Uid:widget.uid)),
         );
       }
     } catch (e) {
@@ -273,7 +273,7 @@ class _extranumberState extends State<extranumber> {
                               ..onTap = () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => login()),
+                                  MaterialPageRoute(builder: (context) => Login()),
                                 );
                               },
                           ),

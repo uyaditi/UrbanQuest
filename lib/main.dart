@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:here_sdk/core.dart';
 import 'package:here_sdk/core.engine.dart';
 import 'package:here_sdk/core.errors.dart';
-import 'package:iitb/into.dart';
+import 'package:iitb/Into.dart';
 import 'dart:io';
 import 'package:lottie/lottie.dart';
 
@@ -54,7 +54,7 @@ class _splashState extends State<splash> {
     Future.delayed(Duration(seconds: 4), () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => intro(),
+          builder: (context) => Intro(),
         ),
       );
     });

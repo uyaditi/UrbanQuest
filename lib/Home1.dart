@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:iitb/home.dart';
-import 'package:iitb/menu.dart';
+import 'package:iitb/Home.dart';
+import 'package:iitb/Menu.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-class home1 extends StatefulWidget {
-  const home1({super.key});
+class Home1 extends StatefulWidget {
+  const Home1({super.key});
 
   @override
-  State<home1> createState() => _home1State();
+  State<Home1> createState() => _Home1State();
 }
 
-class _home1State extends State<home1> {
+class _Home1State extends State<Home1> {
   // late double _latitude;
   // late double _longitude;
   //
@@ -70,8 +70,8 @@ class _home1State extends State<home1> {
   @override
   Widget build(BuildContext context) {
     return ZoomDrawer(
-        menuScreen: menu(),
-        mainScreen: home(),
+        menuScreen: Menu(),
+        mainScreen: Home(),
         borderRadius: 24,
         angle: 0,
         showShadow: true,

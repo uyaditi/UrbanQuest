@@ -4,20 +4,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:iitb/login.dart';
+import 'package:iitb/Login.dart';
 
-import 'extranumber.dart';
-import 'otp.dart';
-import 'otp1.dart';
+import 'Extranumber.dart';
+import 'Otp.dart';
+import 'Otp1.dart';
 
-class register extends StatefulWidget {
-  const register({super.key});
+class Register extends StatefulWidget {
+  const Register({super.key});
 
   @override
-  State<register> createState() => _registerState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _registerState extends State<register> {
+class _RegisterState extends State<Register> {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -72,7 +72,7 @@ class _registerState extends State<register> {
           }else {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => otp1(mobileNumber: phoneNumber, Uid: uid,)),
+              MaterialPageRoute(builder: (context) => Otp1(mobileNumber: phoneNumber, Uid: uid,)),
             );
           }
         }
@@ -144,7 +144,7 @@ class _registerState extends State<register> {
         );
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => login()),
+          MaterialPageRoute(builder: (context) => Login()),
         );
       } else {
         DocumentReference newUserDocRef = await FirebaseFirestore.instance.collection('users').add({
@@ -161,7 +161,7 @@ class _registerState extends State<register> {
         String documentUID = newUserDocRef.id;
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => otp1(mobileNumber: numberController.text, Uid: documentUID,)),
+          MaterialPageRoute(builder: (context) => Otp1(mobileNumber: numberController.text, Uid: documentUID,)),
         );
       }
     } catch (e) {
@@ -533,7 +533,7 @@ class _registerState extends State<register> {
                             ..onTap = () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => login()),
+                                MaterialPageRoute(builder: (context) => Login()),
                               );
                             },
                         ),

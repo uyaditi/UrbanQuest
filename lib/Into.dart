@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:iitb/login.dart';
+import 'package:iitb/Login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'home1.dart';
+import 'Home1.dart';
 
-class intro extends StatefulWidget {
-  const intro({super.key});
+class Intro extends StatefulWidget {
+  const Intro({super.key});
 
   @override
-  State<intro> createState() => _introState();
+  State<Intro> createState() => _IntroState();
 }
 
-class _introState extends State<intro> {
+class _IntroState extends State<Intro> {
 
   late double _latitude;
   late double _longitude;
@@ -78,14 +78,14 @@ class _introState extends State<intro> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => home1(),
+          builder: (context) => Home1(),
         ),
       );
     } else {
       // If the user is not logged in, navigate to the login screen
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => login()),
+        MaterialPageRoute(builder: (context) => Login()),
       );
     }
   }

@@ -8,16 +8,16 @@ import 'package:iitb/Update.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'login.dart';
+import 'Login.dart';
 
-class menu extends StatefulWidget {
-  const menu({super.key});
+class Menu extends StatefulWidget {
+  const Menu({super.key});
 
   @override
-  State<menu> createState() => _menuState();
+  State<Menu> createState() => _MenuState();
 }
 
-class _menuState extends State<menu> {
+class _MenuState extends State<Menu> {
 
   String? Name;
 
@@ -317,7 +317,7 @@ class _menuState extends State<menu> {
                             Navigator.of(context).pop();
                             Navigator.pushReplacement(
                               context,
-                              MaterialPageRoute(builder: (context) => const login()),
+                              MaterialPageRoute(builder: (context) => const Login()),
                             );
                           },
                           child: const Text(

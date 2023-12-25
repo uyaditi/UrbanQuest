@@ -19,6 +19,7 @@ class Explore extends StatefulWidget {
 class _ExploreState extends State<Explore>{
 
   String? Name;
+  String selectedAvatar = "assets/avatars/a2.png";
 
   Future<void> _fetchUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -38,12 +39,23 @@ class _ExploreState extends State<Explore>{
 
   late String firstSelectedChip = '';
 
+  void _loadAvatarFromPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? savedAvatar = prefs.getString('avatar');
+    if (savedAvatar != null && savedAvatar.isNotEmpty) {
+      setState(() {
+        selectedAvatar = savedAvatar;
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     _fetchSelectedChips();
     _getLocationFromSharedPreferences();
     _fetchUserData();
+    _loadAvatarFromPrefs();
   }
 
   Future<void> _getLocationFromSharedPreferences() async {
@@ -412,7 +424,8 @@ class _ExploreState extends State<Explore>{
     _fetchSelectedChips(),
     _getLocationFromSharedPreferences(),
     _fetchUserData(),
-    ]);
+    _loadAvatarFromPrefs(),
+    ] as Iterable<Future>);
 
     setState(() {
       isLoading = false;
@@ -451,14 +464,7 @@ class _ExploreState extends State<Explore>{
                     onTap: (){
                       ZoomDrawer.of(context)!.toggle();
                     },
-                    child: CircleAvatar(
-                      radius: 35.0,
-                      backgroundColor: Color(0xFFeaf3ff),
-                      child: Text(
-                        "AS",
-                        style: TextStyle(fontSize: 24.0, color: Color(0xFF86b8fe)),
-                      ),
-                    ),
+                    child: Image.asset(selectedAvatar,height: 80,width: 80,),
                   ),
                   SizedBox(width: 20),
                   Column(

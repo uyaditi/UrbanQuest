@@ -20,6 +20,7 @@ class Menu extends StatefulWidget {
 class _MenuState extends State<Menu> {
 
   String? Name;
+  String selectedAvatar = "assets/avatars/a2.png";
 
   Future<void> _fetchUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -51,6 +52,7 @@ class _MenuState extends State<Menu> {
   void initState() {
     super.initState();
     _fetchUserData();
+    _loadAvatarFromPrefs();
   }
 
   void _showRatingDialog(BuildContext context) {
@@ -135,6 +137,99 @@ class _MenuState extends State<Menu> {
     );
   }
 
+  void _loadAvatarFromPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? savedAvatar = prefs.getString('avatar');
+    if (savedAvatar != null && savedAvatar.isNotEmpty) {
+      setState(() {
+        selectedAvatar = savedAvatar;
+      });
+    }
+  }
+
+  Widget _buildAvatarRow(SharedPreferences prefs, String imagePath) {
+    return GestureDetector(
+          onTap: () async {
+            setState(() {
+              selectedAvatar = imagePath;
+            });
+            await prefs.setString('avatar', imagePath);
+            Navigator.of(context).pop();
+          },
+          child: Image.asset(imagePath, height: 60, width: 60),
+        );
+  }
+
+  Future<void> _showAvatarSelectionDialog(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            'Select Your Avatar',
+            style: TextStyle(fontFamily: "crete"),
+          ),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  children: [
+                    _buildAvatarRow(prefs, 'assets/avatars/a1.png'),
+                    SizedBox(width: 10,),
+                    _buildAvatarRow(prefs, 'assets/avatars/a2.png'),
+                    SizedBox(width: 10,),
+                    _buildAvatarRow(prefs, 'assets/avatars/a3.png'),
+                    SizedBox(width: 10,),
+                    _buildAvatarRow(prefs, 'assets/avatars/a4.png'),
+                  ],
+                ),
+                SizedBox(height: 20),
+                Row(
+                  children: [
+                    _buildAvatarRow(prefs, 'assets/avatars/a5.png'),
+                    SizedBox(width: 10,),
+                    _buildAvatarRow(prefs, 'assets/avatars/a6.png'),
+                    SizedBox(width: 10,),
+                    _buildAvatarRow(prefs, 'assets/avatars/a7.png'),
+                    SizedBox(width: 10,),
+                    _buildAvatarRow(prefs, 'assets/avatars/a8.png'),
+                  ],
+                ),
+                SizedBox(height: 20),
+                Row(
+                  children: [
+                    _buildAvatarRow(prefs, 'assets/avatars/a9.png'),
+                    SizedBox(width: 10,),
+                    _buildAvatarRow(prefs, 'assets/avatars/a10.png'),
+                    SizedBox(width: 10,),
+                    _buildAvatarRow(prefs, 'assets/avatars/a11.png'),
+                    SizedBox(width: 10,),
+                    _buildAvatarRow(prefs, 'assets/avatars/a12.png'),
+                  ],
+                ),
+                SizedBox(height: 20),
+                Row(
+                  children: [
+                    _buildAvatarRow(prefs, 'assets/avatars/a13.png'),
+                    SizedBox(width: 10,),
+                    _buildAvatarRow(prefs, 'assets/avatars/a14.png'),
+                    SizedBox(width: 10,),
+                    _buildAvatarRow(prefs, 'assets/avatars/a15.png'),
+                    SizedBox(width: 10,),
+                    _buildAvatarRow(prefs, 'assets/avatars/a16.png'),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -161,13 +256,11 @@ class _MenuState extends State<Menu> {
             SizedBox(height: 30,),
             Padding(
               padding: const EdgeInsets.only(left: 19.0),
-              child: CircleAvatar(
-                radius: 50.0,
-                backgroundColor: Color(0xFFeaf3ff),
-                child: Text(
-                  avatarText,
-                  style: TextStyle(fontSize: 24.0, color: Color(0xFF86b8fe)),
-                ),
+              child: GestureDetector(
+                onTap: (){
+                  _showAvatarSelectionDialog(context);
+                },
+                  child: Image.asset(selectedAvatar,height: 100,width: 100,)
               ),
             ),
             const SizedBox(height: 15,),

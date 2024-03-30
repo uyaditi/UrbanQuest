@@ -109,7 +109,7 @@ class _SettingState extends State<Setting> {
                               ),
                               Spacer(),
                               ElevatedButton(style: ElevatedButton.styleFrom(
-                                primary: const Color(0xFF83aabc),
+                                backgroundColor: const Color(0xFF83aabc),
                               ),onPressed: () {}, child: Text("Edit",style: TextStyle(fontFamily: "crete"),))
                             ],
                           ),
@@ -171,7 +171,7 @@ class _SettingState extends State<Setting> {
                   SizedBox(height: 16.0),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: const Color(0xFF83aabc),
+                      backgroundColor: const Color(0xFF83aabc),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0),
                       ),

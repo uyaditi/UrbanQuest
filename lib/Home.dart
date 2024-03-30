@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
-
 import 'package:iitb/Events.dart';
 import 'package:iitb/Explore.dart';
 import 'Map.dart';

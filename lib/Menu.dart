@@ -97,7 +97,7 @@ class _MenuState extends State<Menu> {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: const Color(0xFF83aabc),
+                      backgroundColor: const Color(0xFF83aabc),
                     ),
                     onPressed: () {
                       Navigator.of(context).pop(); // Close the dialog
@@ -124,7 +124,7 @@ class _MenuState extends State<Menu> {
           actions: [
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: const Color(0xFF83aabc),
+                backgroundColor: const Color(0xFF83aabc),
               ),
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
@@ -388,7 +388,7 @@ class _MenuState extends State<Menu> {
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: const Color(0xFF83aabc),
+                            backgroundColor: const Color(0xFF83aabc),
                           ),
                           onPressed: () async {
                             // Clear user data from Shared Preferences

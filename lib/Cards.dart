@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:iitb/Expand.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -85,8 +84,6 @@ class _CardsState extends State<Cards> {
     }
 
     await _prefs.setStringList('likedCards', likedCards);
-
-    //_printLikedCards(); // Print the updated list of liked cards
   }
 
 
